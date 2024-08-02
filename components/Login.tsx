@@ -1,8 +1,12 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Colors } from '@/constants/Colors'
+import { useRouter } from 'expo-router'
 
-const Login = () => {
+export default function Login() {
+
+    const router = useRouter();
+
     return (
         <View style={styles.mainContainer}>
             <View style={styles.imageContainer}>
@@ -11,17 +15,24 @@ const Login = () => {
                 />
             </View>
             <View style={styles.container}>
-                <Text style={styles.title}>
-                    AI Travel Planner
-                </Text>
+                <View style={styles.heading}>
+                    <Text style={styles.title}>
+                        WanderAI 🌍
+                    </Text>
+                    <Text style={styles.subtitle}>
+                        Your AI Travel Planner 🤖
+                    </Text>
+                </View>
                 <Text style={styles.description}>
                     Explore the world effortlessly with our AI-powered travel planner. Get personalized travel plans and recommendations tailored just for you.
                 </Text>
-                <View style={styles.button}>
+                <TouchableOpacity
+                    onPress={() => router.push('/auth/sign-in')}
+                    style={styles.button}>
                     <Text style={styles.buttonText}>
-                        Sign In With Google
+                        Get Started
                     </Text>
-                </View>
+                </TouchableOpacity>
                 <View style={styles.spacer} />
                 <View>
                     <Text style={styles.footerText}>
@@ -33,7 +44,6 @@ const Login = () => {
     )
 }
 
-export default Login
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -59,9 +69,17 @@ const styles = StyleSheet.create({
         gap: 10,
         justifyContent: 'space-between',
     },
+    heading: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     title: {
-        fontSize: 25,
+        fontSize: 28,
         fontFamily: 'outfit-bold',
+    },
+    subtitle: {
+        fontSize: 14,
+        fontFamily: 'outfit-medium',
     },
     description: {
         fontSize: 17,
@@ -74,7 +92,7 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 15,
         marginTop: 20,
-        width: '100%',
+        width: '80%',
         alignItems: 'center',
         elevation: 5,
     },

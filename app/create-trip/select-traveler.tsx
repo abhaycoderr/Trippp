@@ -1,0 +1,101 @@
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
+import { Colors } from '@/constants/Colors';
+import { useNavigation, useRouter } from 'expo-router';
+import { SelectTravelerList } from '@/constants/Options';
+import OptionCard from '@/components/CreateTrip/OptionCard';
+import { CreateTripContext } from '@/context/CreateTripContext';
+
+export default function SelectTraveler() {
+
+    const navigation = useNavigation();
+    const router = useRouter();
+
+    const [selectedTraveler, setSelectedTraveler] = useState<any>();
+
+    const context = useContext(CreateTripContext);
+    if (!context) {
+        throw new Error('CreateTripContext must be used within a CreateTripProvider');
+    }
+    const { tripData, setTripData } = context;
+
+    useEffect(() => {
+        console.log(tripData);
+    }, [tripData]);
+
+    useEffect(() => {
+        navigation.setOptions({
+            headerShown: true,
+            headerTransparent: true,
+            headerTitle: 'Select Traveler',
+        });
+    }, []);
+
+    const setTripDetails = () => {
+        setTripData({
+            ...tripData,
+            travelerCount: selectedTraveler,
+        })
+
+        router.push("/create-trip/select-traveler");
+    };
+
+    return (
+        <View style={styles.page}>
+            <Text style={styles.title}>Who's Traveling</Text>
+            <Text style={styles.subtitle}>Choose your travelers</Text>
+
+            <FlatList
+                data={SelectTravelerList}
+                renderItem={({ item, index }) => (
+                    <TouchableOpacity
+                        onPress={() => setSelectedTraveler(item)}>
+                        <OptionCard option={item} selectedTraveler={selectedTraveler} />
+                    </TouchableOpacity>
+                )}
+            />
+
+            <TouchableOpacity
+                onPress={setTripDetails}
+                style={styles.button}
+            >
+                <Text style={styles.buttonText}>
+                    Continue
+                </Text>
+            </TouchableOpacity>
+        </View>
+    )
+}
+
+const styles = StyleSheet.create({
+    page: {
+        padding: 25,
+        paddingTop: 100,
+        flex: 1,
+        backgroundColor: Colors.WHITE,
+    },
+    title: {
+        fontSize: 30,
+        fontFamily: 'outfit-bold',
+    },
+    subtitle: {
+        fontSize: 20,
+        fontFamily: 'outfit-medium',
+    },
+    button: {
+        backgroundColor: Colors.BLACK,
+        padding: 15,
+        borderRadius: 15,
+        marginTop: 20,
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        elevation: 5,
+    },
+    buttonText: {
+        fontSize: 17,
+        fontFamily: 'outfit',
+        color: Colors.WHITE,
+    },
+});
