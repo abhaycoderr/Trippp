@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { Colors } from '@/constants/Colors';
 import { useNavigation, useRouter } from 'expo-router';
@@ -20,10 +20,6 @@ export default function SelectTraveler() {
     const { tripData, setTripData } = context;
 
     useEffect(() => {
-        console.log(tripData);
-    }, [tripData]);
-
-    useEffect(() => {
         navigation.setOptions({
             headerShown: true,
             headerTransparent: true,
@@ -32,12 +28,16 @@ export default function SelectTraveler() {
     }, []);
 
     const setTripDetails = () => {
+        if (!selectedTraveler) {
+            ToastAndroid.show('Please select traveler category.', ToastAndroid.LONG);
+            return;
+        }
         setTripData({
             ...tripData,
             travelerCount: selectedTraveler,
         })
 
-        router.push("/create-trip/select-traveler");
+        router.push("/create-trip/select-dates");
     };
 
     return (

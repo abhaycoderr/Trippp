@@ -18,14 +18,14 @@ export const SelectTravelerList = [
         title: "Family",
         desc: "A group of fun loving adventure",
         icon: "🏡",
-        people: "3 to 5",
+        people: "3-5",
     },
     {
         id: 4,
         title: "Friends",
         desc: "A bunch of thrill-seekes",
         icon: "🚤",
-        people: "5 to 10",
+        people: "5-10",
     },
 
 ]

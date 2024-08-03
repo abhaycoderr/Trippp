@@ -23,10 +23,6 @@ export default function SearchPlace() {
     }
     const { tripData, setTripData } = context;
 
-    useEffect(() => {
-        console.log(tripData);
-    }, [tripData]);
-
     const setTripDetails = () => {
         setTripData({
             name: "Bengaluru",
