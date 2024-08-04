@@ -2,7 +2,7 @@ import { FlatList, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from
 import React, { useContext, useEffect, useState } from 'react'
 import { Colors } from '@/constants/Colors';
 import { useNavigation, useRouter } from 'expo-router';
-import { SelectTravelerList } from '@/constants/Options';
+import { TravelerOptions } from '@/constants/Options';
 import OptionCard from '@/components/CreateTrip/OptionCard';
 import { CreateTripContext } from '@/context/CreateTripContext';
 
@@ -11,13 +11,14 @@ export default function SelectTraveler() {
     const navigation = useNavigation();
     const router = useRouter();
 
-    const [selectedTraveler, setSelectedTraveler] = useState<any>();
-
     const context = useContext(CreateTripContext);
     if (!context) {
         throw new Error('CreateTripContext must be used within a CreateTripProvider');
     }
     const { tripData, setTripData } = context;
+
+
+    const [selectedTraveler, setSelectedTraveler] = useState<any>(tripData.travelers);
 
     useEffect(() => {
         navigation.setOptions({
@@ -34,7 +35,7 @@ export default function SelectTraveler() {
         }
         setTripData({
             ...tripData,
-            travelerCount: selectedTraveler,
+            travelers: selectedTraveler,
         })
 
         router.push("/create-trip/select-dates");
@@ -46,11 +47,11 @@ export default function SelectTraveler() {
             <Text style={styles.subtitle}>Choose your travelers</Text>
 
             <FlatList
-                data={SelectTravelerList}
+                data={TravelerOptions}
                 renderItem={({ item, index }) => (
                     <TouchableOpacity
                         onPress={() => setSelectedTraveler(item)}>
-                        <OptionCard option={item} selectedTraveler={selectedTraveler} />
+                        <OptionCard option={item} selectedOption={selectedTraveler} />
                     </TouchableOpacity>
                 )}
             />

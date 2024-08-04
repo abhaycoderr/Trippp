@@ -10,8 +10,8 @@ export default function SelectDates(this: any) {
     const navigation = useNavigation();
     const router = useRouter();
 
-    const [startDate, setStartDate] = useState<Date>(new Date);
-    const [endDate, setEndDate] = useState<Date>(new Date);
+    const [startDate, setStartDate] = useState<Date>();
+    const [endDate, setEndDate] = useState<Date>();
 
     const context = useContext(CreateTripContext);
     if (!context) {
@@ -35,18 +35,24 @@ export default function SelectDates(this: any) {
             return;
         }
 
-        const millisecondsDiff = endDate?.getTime() - startDate?.getTime();
+        const millisecondsDiff = (endDate?.getTime() || 0) - (startDate?.getTime() || 0);
         const totalTravelDays = Math.round(millisecondsDiff / (1000 * 60 * 60 * 24)) + 1
 
+        if (totalTravelDays < 1) {
+            ToastAndroid.show('Please select at-least one day.', ToastAndroid.LONG);
+            return;
+        }
 
         setTripData({
             ...tripData,
-            startDate: startDate,
-            endDate: endDate,
-            totalTravelDays: totalTravelDays,
+            travelDuration: {
+                startDate: startDate,
+                endDate: endDate,
+                totalTravelDays: totalTravelDays,
+            }
         })
 
-        // router.push("/create-trip/select-dates");
+        router.push("/create-trip/select-budget");
     };
 
     const onDateChange = (date: any, type: any) => {
@@ -59,7 +65,7 @@ export default function SelectDates(this: any) {
     return (
         <View style={styles.page}>
             <Text style={styles.title}>Travel Dates</Text>
-            <View style={{ marginVertical: 20 }}>
+            <View style={{ marginVertical: 20, flex: 1 }}>
                 <CalendarPicker
                     onDateChange={onDateChange}
                     allowRangeSelection
@@ -72,6 +78,14 @@ export default function SelectDates(this: any) {
                     selectedRangeStyle={{ backgroundColor: Colors.BLACK }}
                     selectedDayTextColor={Colors.WHITE}
                 />
+            </View>
+            <View style={styles.noteContainer}>
+                <Text style={styles.noteHeading}>
+                    Note:
+                </Text>
+                <Text style={styles.noteText} >
+                    Tap on the same date 2 times for a single day trip.
+                </Text>
             </View>
             <TouchableOpacity
                 onPress={setTripDetails}
@@ -95,6 +109,25 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 30,
         fontFamily: 'outfit-bold',
+    },
+    noteContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        gap: 10,
+        padding: 10,
+    },
+    noteHeading: {
+        flexGrow: 1,
+        fontSize: 18,
+        fontFamily: 'outfit-bold',
+    },
+    noteText: {
+        flexShrink: 1,
+        fontSize: 15,
+        fontFamily: 'outfit',
+        color: Colors.GRAY,
     },
     button: {
         backgroundColor: Colors.BLACK,

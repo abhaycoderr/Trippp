@@ -25,10 +25,12 @@ export default function SearchPlace() {
 
     const setTripDetails = () => {
         setTripData({
-            name: "Bengaluru",
-            coordinates: "12.97295073319404, 77.59422758358563",
-            photo: "https://lh5.googleusercontent.com/p/AF1QipOC9lHhSEATYjUCjehr70U0jUjF3jGX5zepjE0=w408-h458-k-no",
-            url: "https://maps.app.goo.gl/rM2HXpUWcmxut8wCA",
+            location: {
+                name: "Bengaluru",
+                coordinates: "12.97295073319404, 77.59422758358563",
+                photo: "https://lh5.googleusercontent.com/p/AF1QipOC9lHhSEATYjUCjehr70U0jUjF3jGX5zepjE0=w408-h458-k-no",
+                url: "https://maps.app.goo.gl/rM2HXpUWcmxut8wCA",
+            }
         });
 
         router.push("/create-trip/select-traveler");
