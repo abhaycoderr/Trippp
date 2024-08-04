@@ -24,14 +24,13 @@ export default function ReviewTrip() {
 
     // Extract and format trip data
     const { location, travelDuration, travelers, budget } = tripData;
-    const startDate = new Date(travelDuration.startDate);
-    const endDate = new Date(travelDuration.endDate);
-    const travelDates = `${startDate.getDate()} ${startDate.toLocaleString('default', { month: 'short' })} to ${endDate.getDate()} ${endDate.toLocaleString('default', { month: 'short' })} (${travelDuration.totalTravelDays} days)`;
-    const travelPartners = `${travelers.title} (${travelers.people} members)`;
-    const travelBudget = `${budget.title} Spending`;
+    const startDate = new Date(travelDuration?.startDate);
+    const endDate = new Date(travelDuration?.endDate);
+    const travelDates = `${startDate?.getDate()} ${startDate?.toLocaleString('default', { month: 'short' })} to ${endDate?.getDate()} ${endDate?.toLocaleString('default', { month: 'short' })} (${travelDuration?.totalTravelDays} days)`;
+    const travelPartners = `${travelers?.title} (${travelers?.people} members)`;
+    const travelBudget = `${budget?.title} Spending`;
 
     const buildTrip = () => {
-        // Implementation for building the trip
         router.push("/create-trip/generate-trip");
     };
 
