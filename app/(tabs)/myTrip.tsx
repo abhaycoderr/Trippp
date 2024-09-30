@@ -1,12 +1,34 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { FontAwesome6 } from '@expo/vector-icons'
 import StartNewTripCard from '@/components/StartNewTripCard';
 import { Colors } from '@/constants/Colors';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { auth, db } from '@/configs/firebaseConfig';
 
 export default function MyTrip() {
 
     const [userTrips, setUserTrips] = useState([]);
+    const user = auth.currentUser;
+    const [loading,setLoading]=useState(false);
+
+    useEffect(()=>{
+        user&&GetMyTrips();
+    },[user])
+
+    const GetMyTrips = async() => {
+        setLoading(true);
+        setUserTrips([]);
+        const q = query(collection(db, 'UserTrips'), where('userEmail', "==", user?.email));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            setUserTrips(prev=>[...prev,doc.data()])
+        });
+        setLoading(false);
+    }
+
 
     return (
         <View style={styles.page}>
@@ -14,11 +36,14 @@ export default function MyTrip() {
                 <Text style={styles.headerText}>MyTrip</Text>
                 <FontAwesome6 name="circle-plus" size={35} color="black" />
             </View>
-
+        
             {
                 userTrips?.length == 0 ?
-                    <StartNewTripCard /> : null
+                    <StartNewTripCard /> 
+                    : 
+                    <UserTripList userTrips={userTrips}/>
             }
+        
         </View>
     )
 }

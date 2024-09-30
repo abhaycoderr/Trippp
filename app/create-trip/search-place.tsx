@@ -26,7 +26,7 @@ export default function SearchPlace() {
     const setTripDetails = () => {
         setTripData({
             location: {
-                name: "Bengaluru",
+                name: "Dehradun",
                 coordinates: "12.97295073319404, 77.59422758358563",
                 photo: "https://lh5.googleusercontent.com/p/AF1QipOC9lHhSEATYjUCjehr70U0jUjF3jGX5zepjE0=w408-h458-k-no",
                 url: "https://maps.app.goo.gl/rM2HXpUWcmxut8wCA",
@@ -52,10 +52,19 @@ export default function SearchPlace() {
                     }
                 }}
                 onPress={(data, details = null) => {
+                    // console.log(data, details);
+                    setTripData({
+                        locationinfo:{
+                            name:data.description,
+                            coordinates:details?.geometry.location,
+                            // photoRef:details?.photos[0]?.photo_reference,
+                            url:details?.url
+                        }
+                    })
                     console.log(data, details);
                 }}
                 query={{
-                    key: process.env.EXPO_PUBLIC_GOOGLE_MAP_KEY,
+                    key: "AIzaSyDDlanSvK0Nz4kRPbDz0NMgpLdhWIgvvzM",
                     language: 'en',
                 }}
             />
