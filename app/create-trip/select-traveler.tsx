@@ -52,7 +52,9 @@ export default function SelectTraveler() {
                     <TouchableOpacity
                         onPress={() => setSelectedTraveler(item)}>
                         <OptionCard option={item} selectedOption={selectedTraveler} />
+                       
                     </TouchableOpacity>
+                    
                 )}
             />
 

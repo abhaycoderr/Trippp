@@ -21,11 +21,16 @@ export default function OptionCard({ option, selectedOption }) {
                                 <FontAwesome name="user" size={20} color={Colors.GRAY} style={{ marginLeft: 5 }} />
                                 <Text style={styles.people}>
                                     {option?.people}
+                                    
                                 </Text>
+                               
                             </View>
                             : null
                     }
-                </View>
+                
+            
+                 </View>
+               
                 <Text style={styles.desc}>
                     {option?.desc}
                 </Text>
@@ -34,6 +39,7 @@ export default function OptionCard({ option, selectedOption }) {
                 <Text style={styles.icon}>{option?.icon}</Text>
             </View>
         </View>
+        // <Text>LGBTQ</Text>
     )
 }
 

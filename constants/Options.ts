@@ -27,6 +27,20 @@ export const TravelerOptions = [
         icon: "🚤",
         people: "5-10",
     },
+    {
+        id: 5,
+        title: "LGBTQ",
+        desc: "Explore Your Uniqueness",
+        icon: "🌈",
+        people: "to be decided",
+    },
+    {
+        id: 6,
+        title: "Specially Abled",
+        desc: "Refine the possibilities",
+        icon: "♿",
+        people: "to be decided",
+    },
 ];
 
 export const BudgetOptions = [

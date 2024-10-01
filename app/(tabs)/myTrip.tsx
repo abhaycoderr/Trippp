@@ -5,6 +5,7 @@ import StartNewTripCard from '@/components/StartNewTripCard';
 import { Colors } from '@/constants/Colors';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { auth, db } from '@/configs/firebaseConfig';
+import { useNavigation, useRouter } from 'expo-router';
 
 export default function MyTrip() {
 
@@ -33,7 +34,7 @@ export default function MyTrip() {
     return (
         <View style={styles.page}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>MyTrip</Text>
+                <Text style={styles.headerText}>Holidate</Text>
                 <FontAwesome6 name="circle-plus" size={35} color="black" />
             </View>
         
@@ -66,5 +67,6 @@ const styles = StyleSheet.create({
     headerText: {
         fontSize: 35,
         fontFamily: 'outfit-bold',
+        color:'orange'
     }
 })

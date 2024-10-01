@@ -10,6 +10,7 @@ export default function ReviewCard({ icon, heading, desc }) {
                 <Text style={styles.heading}>{heading}</Text>
                 <Text style={styles.desc}>{desc}</Text>
             </View>
+            
         </View>
     );
 }

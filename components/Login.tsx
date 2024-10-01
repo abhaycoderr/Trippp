@@ -34,11 +34,6 @@ export default function Login() {
                     </Text>
                 </TouchableOpacity>
                 <View style={styles.spacer} />
-                <View>
-                    <Text style={styles.footerText}>
-                        Made with ❤️ by Vineet Kumar
-                    </Text>
-                </View>
             </View>
         </View>
     )

@@ -43,6 +43,8 @@ export default function GenerateTrip() {
         const tripResponse = JSON.parse(result.response.text())
         const docId = (Date.now()).toString();
         console.log(tripResponse);
+        // router.replace('../(tabs)/results.jsx');
+        router.push("/(tabs)/results.jsx");
 
         await setDoc(doc(db, "userTrips", docId), {
             docId: docId,
@@ -51,7 +53,9 @@ export default function GenerateTrip() {
             tripData: tripData,
         });
 
-        router.push('/myTrip');
+        
+
+       
     }
 
     return (
