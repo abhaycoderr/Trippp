@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity } from 'react-native';
-
+import { useNavigation, useRouter } from 'expo-router'
+import { handleFirebaseAuthError } from '@/utils/firebaseErrorHandling';
 const ProfileScreen = () => {
   // State for loan amount input
   const [loanAmountInput, setLoanAmountInput] = useState('');
   
+  const navigation = useNavigation();
+    const router = useRouter();
   // State for actual loan amount stored after pressing the "Get Loan" button
   const [loanAmount, setLoanAmount] = useState(0);
 
@@ -20,8 +23,13 @@ const ProfileScreen = () => {
       // Clear the input field after the loan is updated
       setLoanAmountInput('');
     }, 5000);
+
+    
   };
 
+  const handlelogout = () => {
+    router.replace("/auth/sign-up");
+  }
   return (
     <View style={styles.container}>
       {/* Profile Image */}
@@ -59,11 +67,17 @@ const ProfileScreen = () => {
       <TouchableOpacity style={styles.loanButton} onPress={handleLoanRequest}>
         <Text style={styles.loanButtonText}>Get Loan</Text>
       </TouchableOpacity>
+
+      {/* Logout Button */}
+      <TouchableOpacity style={{backgroundColor:'black',marginTop:20}} onPress={handlelogout}>
+        <Text style={{color:"white"}}>Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
     padding: 20,
