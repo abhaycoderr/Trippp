@@ -1,41 +1,45 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, ToastAndroid } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { useNavigation, useRouter } from 'expo-router'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ToastAndroid } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { useNavigation, useRouter } from 'expo-router';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { Colors } from '@/constants/Colors';
 import { auth } from '@/configs/firebaseConfig';
 import { handleFirebaseAuthError } from '@/utils/firebaseErrorHandling';
 
 export default function SignIn() {
-
     const navigation = useNavigation();
     const router = useRouter();
 
     useEffect(() => {
         navigation.setOptions({
             headerShown: false,
-        })
+        });
+
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                router.replace("/(tabs)/myTrip"); // Navigate if already logged in
+            }
+        });
+
+        return () => unsubscribe(); // Cleanup subscription on unmount
     }, []);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
-
     const handleSignIn = () => {
-
-        if (!email && !password) {
+        if (!email || !password) {
             ToastAndroid.show('Please Enter All Details', ToastAndroid.BOTTOM);
             return;
         }
 
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in 
                 const user = userCredential.user;
                 ToastAndroid.show("Sign In was successful.", ToastAndroid.BOTTOM);
-                // router.replace('/');
+                router.replace("/(tabs)/myTrip"); // Ensure this route is correct
             })
             .catch((error) => {
                 handleFirebaseAuthError(error);
@@ -46,40 +50,26 @@ export default function SignIn() {
         router.replace('/auth/sign-up');
     }
 
-    // Function to toggle the password visibility state 
     const toggleShowPassword = () => {
         setShowPassword(!showPassword);
     };
 
-
     return (
         <View style={styles.page}>
-            <Text style={{
-                fontSize: 30,
-                fontFamily: 'outfit-bold',
-            }}>
+            <Text style={{ fontSize: 30, fontFamily: 'outfit-bold' }}>
                 Let's Sign You In
             </Text>
-            <Text style={{
-                fontSize: 30,
-                fontFamily: 'outfit',
-                color: Colors.GRAY,
-            }}>
+            <Text style={{ fontSize: 30, fontFamily: 'outfit', color: Colors.GRAY }}>
                 Welcome Back 👋🏻
             </Text>
-            <Text style={{
-                fontSize: 30,
-                fontFamily: 'outfit',
-                color: Colors.GRAY,
-            }}>
+            <Text style={{ fontSize: 30, fontFamily: 'outfit', color: Colors.GRAY }}>
                 You Have Been Missed!
             </Text>
 
             <View style={{ marginVertical: 20 }}>
                 <View>
                     <Text style={styles.label}>Email</Text>
-                    <View
-                        style={styles.input}>
+                    <View style={styles.input}>
                         <TextInput
                             placeholder="Enter Your Email"
                             keyboardType='email-address'
@@ -106,9 +96,7 @@ export default function SignIn() {
                 </View>
             </View>
 
-            <TouchableOpacity
-                onPress={handleSignIn}
-                style={styles.button}>
+            <TouchableOpacity onPress={handleSignIn} style={styles.button}>
                 <Text style={styles.buttonText}>
                     Sign In
                 </Text>
@@ -118,17 +106,13 @@ export default function SignIn() {
                 <Text style={styles.signUpPrompt}>
                     Don't have an account?
                 </Text>
-                <TouchableOpacity
-                    onPress={handleSignUp}
-                    style={styles.signUpButton}
-                >
+                <TouchableOpacity onPress={handleSignUp} style={styles.signUpButton}>
                     <Text style={styles.signUpButtonText}>Sign Up</Text>
                 </TouchableOpacity>
             </View>
         </View>
-    )
+    );
 }
-
 
 const styles = StyleSheet.create({
     page: {
@@ -187,4 +171,4 @@ const styles = StyleSheet.create({
         fontSize: 17,
         textDecorationLine: 'underline',
     }
-})
+});

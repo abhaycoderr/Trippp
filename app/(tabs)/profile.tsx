@@ -31,7 +31,7 @@ const ProfileScreen = () => {
       />
 
       {/* User Name */}
-      <Text style={styles.userName}>Aarya Bani</Text>
+      <Text style={styles.userName}>Aditya Pandey</Text>
 
       {/* Wallet Info */}
       <View style={styles.walletSection}>
