@@ -41,32 +41,15 @@ const ProfileScreen = () => {
       {/* User Name */}
       <Text style={styles.userName}>Aditya Pandey</Text>
 
-      {/* Wallet Info */}
-      <View style={styles.walletSection}>
-        <Text style={styles.walletText}>Holidate Wallet</Text>
-        {/* Displaying loan amount */}
-        <Text style={styles.walletAmount}>{loanAmount}</Text>
-      </View>
-
       {/* Emergency SOS */}
       <View style={styles.sosSection}>
         <Text style={styles.sosText}>Emergency SOS</Text>
         <Text style={styles.sosNumber}>112</Text>
       </View>
 
-      {/* Loan Input Section */}
-      <TextInput
-        style={styles.loanInput}
-        placeholder="Enter Loan Amount"
-        keyboardType="numeric"
-        value={loanAmountInput}
-        onChangeText={setLoanAmountInput}
-      />
+     
 
-      {/* Get Loan Button */}
-      <TouchableOpacity style={styles.loanButton} onPress={handleLoanRequest}>
-        <Text style={styles.loanButtonText}>Get Loan</Text>
-      </TouchableOpacity>
+      
 
       {/* Logout Button */}
       <TouchableOpacity style={{backgroundColor:'black',marginTop:20}} onPress={handlelogout}>
