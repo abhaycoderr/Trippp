@@ -36,6 +36,9 @@ export default function SignUp() {
             return;
         }
 
+        if(fullName == "Deepak Rajput" || fullName == "Aryabani"){
+            ToastAndroid.show('You have a criminal record,you cannot proceed on.', ToastAndroid.BOTTOM);
+        }
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed up 
