@@ -6,6 +6,7 @@ import { Colors } from '@/constants/Colors';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { auth, db } from '@/configs/firebaseConfig';
 import { useNavigation, useRouter } from 'expo-router';
+import SpeechRecognitionComponent from '../../components/SpeechRecognition';
 
 export default function MyTrip() {
 
@@ -45,6 +46,7 @@ export default function MyTrip() {
                     <UserTripList userTrips={userTrips}/>
             }
         
+          
         </View>
     )
 }

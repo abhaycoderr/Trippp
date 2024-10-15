@@ -29,6 +29,11 @@ const Result = () => {
         setLoanAmountInput('');
       }, 5000);
     };
+
+
+    const movetoLoan = () => {
+      router.replace("/(tabs)/loan");
+    }
   return (
     <ScrollView style={{ padding: 20 }}>
       <FlightDetails flight={tripData.flight} />
@@ -36,29 +41,14 @@ const Result = () => {
       <PlaceList places={tripData.placesToVisit} />
       <DailyPlan dailyPlan={tripData.dailyPlan} />
 
+    <View  style={styles.container2}>
+    <Text>Are you specially abled?</Text>
+    <Text style={{marginBottom:20}}>Get Donations from NGO connected with us...</Text>
 
-        {/* Wallet Info */}
-        <View style={styles.walletSection}>
-        <Text style={styles.walletText}>If out of budget,we can help you with</Text>
-        <Text style={styles.walletText}>Holidate Wallet</Text>
-        {/* Displaying loan amount */}
-        <Text style={styles.walletAmount}>{loanAmount}</Text>
-      </View>
-
-
-      <TextInput
-        style={styles.loanInput}
-        placeholder="Enter Loan Amount"
-        keyboardType="numeric"
-        value={loanAmountInput}
-        onChangeText={setLoanAmountInput}
-      />
-
-      {/* Get Loan Button */}
-      <TouchableOpacity style={styles.loanButton} onPress={handleLoanRequest}>
-        <Text style={styles.loanButtonText}>Get Loan</Text>
+    <TouchableOpacity style={styles.loanButton} onPress={movetoLoan}>
+        <Text style={styles.loanButtonText}>Wanna Get Loan</Text>
       </TouchableOpacity>
-
+ </View>
     </ScrollView>
   );
 };
@@ -69,6 +59,17 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#fff',
     alignItems: 'center',
+    
+  },
+
+  container2: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    borderTopLeftRadius:10,
+    borderTopRightRadius:10,
+    marginBottom:50
   },
   profileImage: {
     width: 100,
@@ -120,11 +121,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 30,
     borderRadius: 5,
-    marginBottom: 50,
+    marginBottom: 10,
   },
   loanButtonText: {
     color: '#fff',
     fontSize: 16,
+    textAlign:"center"
   },
 });
 

@@ -18,8 +18,14 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#ffffff",
+        "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "audio",
+        "RECORD_AUDIO"
+      ]
+      
+    }
     },
     "web": {
       "bundler": "metro",

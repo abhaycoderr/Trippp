@@ -30,11 +30,12 @@ const ProfileScreen = () => {
   const handlelogout = () => {
     router.replace("/auth/sign-up");
   }
+  
   return (
     <View style={styles.container}>
       {/* Profile Image */}
       <Image
-        source={{ uri: 'https://placekitten.com/200/200' }} // Placeholder for user profile
+        source={{ uri: 'https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=600' }} // Placeholder for user profile
         style={styles.profileImage}
       />
 

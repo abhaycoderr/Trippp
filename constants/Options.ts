@@ -41,6 +41,13 @@ export const TravelerOptions = [
         icon: "♿",
         people: "to be decided",
     },
+    {
+        id: 7,
+        title: "Conncted NGOs",
+        desc: "Explore the world",
+        icon: "🤝",
+        people: "to be decided",
+    },
 ];
 
 export const BudgetOptions = [
