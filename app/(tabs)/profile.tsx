@@ -53,7 +53,7 @@ const ProfileScreen = () => {
       
 
       {/* Logout Button */}
-      <TouchableOpacity style={{backgroundColor:'black',marginTop:20}} onPress={handlelogout}>
+      <TouchableOpacity style={{backgroundColor:'black',marginTop:20,padding:20,borderRadius:10,}} onPress={handlelogout}>
         <Text style={{color:"white"}}>Logout</Text>
       </TouchableOpacity>
     </View>
