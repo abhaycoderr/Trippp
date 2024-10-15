@@ -6,6 +6,7 @@ const LoanPage = () => {
     const [loanAmountInput, setLoanAmountInput] = useState('');
     const [ngoAmountInput, setngoAmountInput] = useState('0');
     const [loanAmount, setLoanAmount] = useState(0);
+    const [ngoAmount, setngoAmount] = useState(0);
     const [speciallyAbled, setSpeciallyAbled] = useState(false); // Use a boolean to indicate state
 
     const handleLoanRequest = () => {
@@ -15,7 +16,7 @@ const LoanPage = () => {
     };
     const ngoAmountInputRequest = () => {
         console.log('Requested Loan Amount:', loanAmountInput);
-        setLoanAmount(ngoAmountInput);
+        setngoAmount(ngoAmountInput);
         setngoAmountInput('');
     };
 
@@ -56,14 +57,14 @@ const LoanPage = () => {
 
             <FileInput onFileAccepted={handleFileAccepted} />
 
-            <Text style={styles.walletAmount}>NGO Amount - &#8377;{ngoAmountInput}</Text>
+            <Text style={styles.walletAmount}>NGO Amount - &#8377;{ngoAmount}</Text>
             <Text style={{fontWeight:"bold"}}>NOTE : No Payback required...</Text>
 
             {speciallyAbled && ( // Only show the input if the user is specially abled
                 <View>
                     <TextInput
                         style={styles.loanInput}
-                        placeholder="Enter Loan Amount"
+                        placeholder="Enter Money from NGO"
                         keyboardType="numeric"
                         value={ngoAmountInput}
                         onChangeText={setngoAmountInput}
